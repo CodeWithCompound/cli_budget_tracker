@@ -3,6 +3,9 @@ use std::fs::OpenOptions;
 use std::io::Write;
 
 
+
+
+
 fn main() {
     let mut args = env::args().skip(1);
     let command = match args.next() {
@@ -17,48 +20,35 @@ fn main() {
 
         match command.as_str() {
             "add" => {
-
-        println!("ADD choosen");
-
-        let amount_str = match args.next() {
+        let price_str = match args.next() {
         Some(v) => v,
         None => {
-            eprintln!("Missing <amount>. Usage: cargo run -- add <amount> <category> <note>");
+            eprintln!("Missing <category>. Usage: Cargo run -- add <price> <category>");
             return;
         }   
     };
 
 
-                let amount: f64 = match amount_str.parse() {
+                let price: f64 = match price_str.parse() {
                     Ok(v) => v,
                     Err(_) => {
-                        eprintln!("Amount must be a number, got: {}", amount_str);
+                        eprintln!("price must be a number, got: {}", price_str);
                         return;
                     }
                 };
-                println!("amount as number: {}", amount);
+                println!("price as number: {} $", price);
 
                 let category = match args.next() {
                     Some(v) => v,
 
                     None => {
-                        eprintln!("Missing <category>. Usage: Cargo run -- add <amount> <category> <note>");
+                        eprintln!("Missing <category>. Usage: Cargo run -- add <price> <category>");
                         return;
                     }
                 };
                 println!("category as String: {}", category);
 
-                let note = match args.next() {
-                    Some(v) => v,
-
-                    None => {
-                        eprintln!("Missing <note>. Usage: Cargo run -- add <amount> <category> <note>");
-                        return;
-                    }
-                };
-                println!("note as String: {}", note);
-
-                save_entry(amount, &category, &note);
+                save_entry(price, &category);
                 println!("Saved entry to budget.csv");
 
             } 
@@ -73,7 +63,7 @@ fn main() {
             } 
         }
 }
-fn save_entry(amount: f64, category: &str, note: &str) {
+fn save_entry(price: f64, category: &str) {
     let mut file = match OpenOptions::new()
         .create(true)
         .append(true)
@@ -86,8 +76,8 @@ fn save_entry(amount: f64, category: &str, note: &str) {
         }
     };
 
-    // very simple CSV line: amount,category,note\n
-    let line = format!("{},{},{}\n", amount, category, note);
+    // very simple CSV line: price,category,note\n
+    let line = format!("{}: {} $\n", category, price);
 
     if let Err(e) = file.write_all(line.as_bytes()) {
         eprintln!("Failed to write to file: {}", e);
