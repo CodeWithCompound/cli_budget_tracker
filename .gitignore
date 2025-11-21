@@ -1,0 +1,9 @@
+# Rust build output
+target/
+
+# Local data file
+budget.csv
+
+# Windows debugging + executable stuff
+*.exe
+*.pdb

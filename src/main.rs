@@ -1,4 +1,7 @@
 use std::env;
+use std::fs::OpenOptions;
+use std::io::Write;
+
 
 fn main() {
     let mut args = env::args().skip(1);
@@ -55,6 +58,9 @@ fn main() {
                 };
                 println!("note as String: {}", note);
 
+                save_entry(amount, &category, &note);
+                println!("Saved entry to budget.csv");
+
             } 
             "list" => {
                 println!("LIST choosen")
@@ -66,4 +72,24 @@ fn main() {
                 println!("Unknown command")
             } 
         }
+}
+fn save_entry(amount: f64, category: &str, note: &str) {
+    let mut file = match OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open("budget.csv")
+    {
+        Ok(f) => f,
+        Err(e) => {
+            eprintln!("Could not open budget.csv: {}", e);
+            return;
+        }
+    };
+
+    // very simple CSV line: amount,category,note\n
+    let line = format!("{},{},{}\n", amount, category, note);
+
+    if let Err(e) = file.write_all(line.as_bytes()) {
+        eprintln!("Failed to write to file: {}", e);
+    }
 }
