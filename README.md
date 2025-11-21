@@ -14,7 +14,7 @@ Right now it’s mainly about **parsing arguments cleanly** and making sure amou
   - `list`
   - `summary`
 - For `add`:
-  - expects: `<amount> <category> <note>`
+  - expects: `<amount> <category>`
   - checks that `<amount>` is a valid `f64`
   - prints everything back in a nice way
   - screams at you if you:
