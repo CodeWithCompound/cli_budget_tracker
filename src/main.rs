@@ -1,3 +1,4 @@
+use std::fs;
 use std::env;
 use std::fs::OpenOptions;
 use std::io::Write;
@@ -53,8 +54,23 @@ fn main() {
 
             } 
             "list" => {
-                println!("LIST choosen")
-            } 
+                println!("--- Your budget entries ---");
+
+                match fs::read_to_string("budget.csv") {
+                    Ok(content) => {
+                        if content.trim().is_empty() {
+                            println!("(no entries yet)");
+                        } else {
+                            print!("{}", content);
+                        }
+                    }
+                    Err(_) => {
+                        println!("No budget.csv found (no entries yet).");
+                    }
+                }
+            }
+
+             
             "summary" => {
                 println!("SUMMARY choosen")
             }
