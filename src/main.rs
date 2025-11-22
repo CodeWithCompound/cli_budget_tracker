@@ -9,6 +9,7 @@ use std::env;
 
 
 
+
 fn main() {
     let mut args = env::args().skip(1);
     let command = match args.next() {
@@ -73,22 +74,63 @@ fn main() {
             }
 
              
-            "summary" => {
-                println!("--- SUMMARY ---");
-                //this part is not finished, working on 
-                //read the whole file into a String
-                let content = match fs::read_to_string("budget.csv") {
-                    Ok(c) => c,
-                    Err(_) => {
-                        println!("No budget.csv found or could not read it.");
-                        return;
-                    }
-                };
-                // later for the total
-                let mut total_spent: f64 = 0.0;
-                // for now, only prints the raw content
-                println!("content:\n{}", content);
+"summary" => {
+    println!("--- SUMMARY ---");
+
+    let content = match fs::read_to_string("budget.csv") {
+        Ok(c) => c,
+        Err(_) => {
+            println!("No budget.csv found or could not read it.");
+            return;
+        }
+    };
+
+    // category -> total price
+    let mut totals: HashMap<String, f64> = HashMap::new();
+    let mut grand_total: f64 = 0.0;
+
+    for line in content.lines() {
+        let line = line.trim();
+        if line.is_empty() {
+            continue;
+        }
+
+        if let Some((category_part, rest)) = line.split_once(':') {
+            let category = category_part.trim();
+
+            // remove '$' and spaces from the right part
+            let price_str = rest.replace('$', "").trim().to_string();
+
+            if let Ok(value) = price_str.parse::<f64>() {
+                // add to that category’s total
+                let entry = totals.entry(category.to_string()).or_insert(0.0);
+                *entry += value;
+
+                // also add to overall total
+                grand_total += value;
+            } else {
+                eprintln!("Skipping line with invalid number: {}", line);
             }
+        } else {
+            eprintln!("Skipping malformed line (no ':'): {}", line);
+        }
+    }
+
+    
+    if totals.is_empty() {
+        println!("No valid entries found in budget.csv");
+        return;
+    }
+
+    println!();
+    for (category, sum) in &totals {
+        println!("{:<12} {:>8.2} $", category, sum);
+    }
+    println!("------------------------");
+    println!("TOTAL:       {:>8.2} $", grand_total);
+}
+
+
 
             _ => {
                 println!("Unknown command")
