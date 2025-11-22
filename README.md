@@ -13,17 +13,20 @@ Right now it’s mainly about **parsing arguments cleanly** and making sure amou
   - `add`
   - `list`
   - `summary`
-- For `add`:
-  - expects: `<amount> <category>`
-  - checks that `<amount>` is a valid `f64`
-  - prints everything back in a nice way
-  - screams at you if you:
-    - forget an argument
-    - type a non-number as amount (`Amount must be a number, got: apple`)
-- `list` and `summary` are stubs for now and just print that they were chosen.
+- add → fully working
+validates amount
+writes entries to budget.csv
+prints nice formatted output
 
-It’s basically the skeleton of a real budget tracker:
-parsing CLI input properly + a clean place to plug in file/database logic later.
+- list → now fully implemented
+opens budget.csv
+prints every entry cleanly
+basically a tiny file viewer for my financial crimes
+
+- summary → half-built but alive
+reads the whole CSV file into a string
+total spend + category breakdown coming soon
+right now it just prints the raw file so i can see what i’m working with
 
 ---
 
