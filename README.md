@@ -13,24 +13,29 @@ Right now it’s mainly about **parsing arguments cleanly** and making sure amou
   - `add`
   - `list`
   - `summary`
-- add → fully working
+  - `help`
+
+  ---
+- add
   
 validates amount |
  writes entries to budget.csv |
  prints nice formatted output
 
-- list → now fully implemented
+- list
 
 opens budget.csv |
  prints every entry cleanly |
  basically a tiny file viewer for my financial crimes
 
-- summary → half-built but alive
+- summary
   
 reads the whole CSV file into a string |
  total spend + category breakdown coming soon |
  right now it just prints the raw file so i can see what i’m working with 
+- help
 
+  shows you all the different commands available
 ---
 
 ## How to run it
