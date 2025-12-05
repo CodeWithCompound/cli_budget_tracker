@@ -1,5 +1,6 @@
 # cli Budget Tracker
 ![screenshot](preview_cli_budget.png)
+
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 tiny Rust command line tool i'm using to bully my spending habbits.  
@@ -11,7 +12,7 @@ you run it from the terminal, tell it what you did with your money, and it yells
 ## Tech Stack
 
 - Language: Rust
-- Main libs/frameworks: REPLACE_ME_IDIOT
+- Main libs/frameworks: standard library
 
 ---
 
