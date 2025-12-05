@@ -1,5 +1,5 @@
 #cli Budget Tracker
-![screenshot](REPLACE_ME_IDIOT)
+![screenshot](preview_cli_budget.png)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 tiny Rust command line tool i'm using to bully my spending habbits.  
