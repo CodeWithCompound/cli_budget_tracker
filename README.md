@@ -49,9 +49,6 @@ reads the whole CSV file into a string |
 You need Rust + Cargo installed.
 ```bash
 # clone the repo
-git clone https://github.com/USERNAME/REPO_NAME.git
-cd REPO_NAME
-
 
 git clone https://github.com/CodeWithCompound/cli_budget_tracker.git
 cd cli_budget_tracker
