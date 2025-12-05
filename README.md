@@ -42,8 +42,9 @@ reads the whole CSV file into a string |
 
 You need Rust + Cargo installed.
 
-Clone the repo:
+----------------------------------------------------------------------------------------------
 
-```bash
+
+
 git clone https://github.com/CodeWithCompound/cli_budget_tracker.git
 cd cli_budget_tracker
