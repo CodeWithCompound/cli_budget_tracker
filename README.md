@@ -1,4 +1,4 @@
-#cli Budget Tracker
+# cli Budget Tracker
 ![screenshot](preview_cli_budget.png)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
